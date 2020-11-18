@@ -1,6 +1,24 @@
 from matrix import *
 from copy import deepcopy
+import random
 
+def select_arrayBlk():
+    randNum = random.randrange(1, 8)
+    if(randNum==1):
+        return arrayBlk1
+    elif(randNum==2):
+        return arrayBlk2
+    elif(randNum==3):
+        return arrayBlk3
+    elif(randNum==4):
+        return arrayBlk4
+    elif(randNum==5):
+        return arrayBlk5
+    elif(randNum==6):
+        return arrayBlk6
+    elif(randNum==7):
+        return arrayBlk7
+    
 def draw_matrix(m):
     array = m.get_array()
     for y in range(m.get_dy()):
@@ -38,7 +56,35 @@ def rotate(direction):
 ###
 ### initialize variables
 ###     
-arrayBlk = [ [ 0, 0, 1, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 1, 0 ] ]
+arrayBlk1 = [[1, 1],
+             [1, 1]]
+
+arrayBlk2 = [[0, 1, 0],
+             [0, 1, 1],
+             [0, 0, 1]]
+
+arrayBlk3 = [[1, 0, 0],
+             [1, 1, 1],
+             [0, 0, 0]]
+
+arrayBlk4 = [[0, 0, 1],
+             [1, 1, 1],
+             [0, 0, 0]]
+
+arrayBlk5 = [[0, 0, 1],
+             [0, 1, 1],
+             [0, 1, 0]]
+
+arrayBlk6 = [[0, 1, 0],
+             [1, 1, 1],
+             [0, 0, 0]]
+
+arrayBlk7 = [[0, 0, 1, 0],
+             [0, 0, 1, 0],
+             [0, 0, 1, 0],
+             [0, 0, 1, 0]]
+
+arrayBlk = select_arrayBlk()
 
 ### integer variables: must always be integer!
 iScreenDy = 15
@@ -141,6 +187,7 @@ while True:
         top = 0
         left = iScreenDw + iScreenDx//2 - 2
         newBlockNeeded = False
+        arrayBlk = select_arrayBlk()
         currBlk = Matrix(arrayBlk)
         tempBlk = iScreen.clip(top, left, top+currBlk.get_dy(), left+currBlk.get_dx())
         tempBlk = tempBlk + currBlk
