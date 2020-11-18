@@ -100,8 +100,14 @@ while True:
         arrayBlk = rotate(1)
         currBlk = Matrix(arrayBlk)
     elif key == ' ': # drop the block
-        print('Not implemented')
-        continue
+        while(True):
+            top += 1
+            tempBlk = iScreen.clip(
+                top, left, top+currBlk.get_dy(), left+currBlk.get_dx())
+            tempBlk = tempBlk + currBlk
+
+            if tempBlk.anyGreaterThan(1):
+                break
     else:
         print('Wrong key!!!')
         continue
@@ -120,7 +126,8 @@ while True:
             arrayBlk = rotate(-1)
             currBlk = Matrix(arrayBlk)
         elif key == ' ': # undo: move up
-            print('Not implemented')
+            top -= 1
+            newBlockNeeded = True
 
         tempBlk = iScreen.clip(top, left, top+currBlk.get_dy(), left+currBlk.get_dx())
         tempBlk = tempBlk + currBlk
