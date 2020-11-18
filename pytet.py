@@ -1,4 +1,5 @@
 from matrix import *
+from copy import deepcopy
 
 def draw_matrix(m):
     array = m.get_array()
@@ -11,6 +12,27 @@ def draw_matrix(m):
             else:
                 print("XX", end='')
         print()
+        
+def rotate(direction):
+    tempArray = deepcopy(arrayBlk)
+    cy = len(tempArray)
+    cx = len(tempArray[0])
+    n = cx - 1
+
+    # clockwise: 1
+    if (direction == 1):
+        for y in range(cy):
+            for x in range(cx):
+                tempArray[x][n-y] = arrayBlk[y][x]
+
+    # counter clockwise:-1
+    elif (direction == -1):
+        for y in range(cy):
+            for x in range(cx):
+                tempArray[n-x][y] = arrayBlk[y][x]
+
+    return tempArray
+
 
 
 ###
@@ -75,8 +97,8 @@ while True:
     elif key == 's': # move down
         top += 1
     elif key == 'w': # rotate the block clockwise
-        print('Not implemented')
-        continue
+        arrayBlk = rotate(1)
+        currBlk = Matrix(arrayBlk)
     elif key == ' ': # drop the block
         print('Not implemented')
         continue
@@ -95,7 +117,8 @@ while True:
             top -= 1
             newBlockNeeded = True
         elif key == 'w': # undo: rotate the block counter-clockwise
-            print('Not implemented')
+            arrayBlk = rotate(-1)
+            currBlk = Matrix(arrayBlk)
         elif key == ' ': # undo: move up
             print('Not implemented')
 
